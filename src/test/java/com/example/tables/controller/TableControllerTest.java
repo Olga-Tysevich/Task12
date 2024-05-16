@@ -56,7 +56,7 @@ class TableControllerTest {
 
     @Test
     void createTableTest() throws Exception {
-        TableDTO table = MockUtils.createTable();
+        TableDTO table = MockUtils.createTable1();
         performSaveOrUpdate(table,"/tables/table-create");
     }
 
@@ -97,7 +97,7 @@ class TableControllerTest {
 
     @Test
     void updateTable() throws Exception {
-        TableDTO table = MockUtils.createTable();
+        TableDTO table = MockUtils.createTable1();
         table.setId(FIRST_TABLE_ID);
         performSaveOrUpdate(table, "/tables/table-update");
     }

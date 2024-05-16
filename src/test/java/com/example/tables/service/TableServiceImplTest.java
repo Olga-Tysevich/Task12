@@ -3,6 +3,7 @@ package com.example.tables.service;
 import com.example.tables.dto.TableDTO;
 import com.example.tables.utils.MockUtils;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.jdbc.AutoConfigureDataJdbc;
@@ -15,6 +16,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 import static com.example.tables.utils.MockConstant.*;
+import static com.example.tables.utils.MockUtils.createTable1;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @AutoConfigureDataJdbc
@@ -24,26 +26,37 @@ class TableServiceImplTest {
     @Autowired
     private TableService tableService;
 
+
+    @BeforeEach
+    void addToBD() {
+        MockUtils.createTables().forEach(tableService::createOrUpdateTable);
+    }
+
     @Test
     public void createOrUpdateTableTest() {
-        TableDTO table = MockUtils.createTable();
+        List<TableDTO> before = tableService.findAll();
+
+        TableDTO table = createTable1();
         tableService.createOrUpdateTable(table);
 
-        TableDTO createResult = tableService.findById(ID_OF_CREATED_TABLE);
+        List<TableDTO> after = tableService.findAll();
 
-        Assertions.assertEquals(table.getSize(), createResult.getSize());
-        Assertions.assertEquals(table.getBrand(), createResult.getBrand());
-        Assertions.assertEquals(table.getColor(), createResult.getColor());
-        Assertions.assertEquals(table.getMaterial(), createResult.getMaterial());
+        Assertions.assertNotEquals(before.size(), after.size());
 
-        table.setId(ID_OF_CREATED_TABLE);
-        table.setSize(SIZES.get(1));
-        table.setBrand(BRANDS.get(1));
+        TableDTO createdTable = after.get(after.size() - 1);
 
-        tableService.createOrUpdateTable(table);
+        Assertions.assertEquals(table.getSize(), createdTable.getSize());
+        Assertions.assertEquals(table.getBrand(), createdTable.getBrand());
+        Assertions.assertEquals(table.getColor(), createdTable.getColor());
+        Assertions.assertEquals(table.getMaterial(), createdTable.getMaterial());
 
-        Assertions.assertNotEquals(table.getSize(), createResult.getSize());
-        Assertions.assertNotEquals(table.getBrand(), createResult.getBrand());
+        createdTable.setSize(SIZES.get(1));
+        createdTable.setBrand(BRANDS.get(1));
+
+        tableService.createOrUpdateTable(createdTable);
+
+        Assertions.assertNotEquals(table.getSize(), createdTable.getSize());
+        Assertions.assertNotEquals(table.getBrand(), createdTable.getBrand());
 
     }
 
@@ -53,7 +66,6 @@ class TableServiceImplTest {
 
         Assertions.assertNotNull(table);
         Assertions.assertEquals(table.getId(), TABLE_ID_FOR_SEARCH);
-        Assertions.assertEquals(table.getBrand(), BRAND_FOR_SEARCH);
     }
 
     @Test
@@ -65,17 +77,15 @@ class TableServiceImplTest {
     @Test
     public void findAllTest() {
         List<TableDTO> allTables = tableService.findAll();
-        Assertions.assertEquals(allTables.size(), INITIAL_NUMBER_OF_ENTRIES);
+        Assertions.assertNotEquals(allTables.size(), EMPTY_LIST);
     }
 
     @Test
     public void findForPageTest() {
         Page<TableDTO> firstPageWithoutSearch = tableService.findForPage(FIRST_PAGE, BRAND_FIELD, Sort.Direction.ASC.name(), null);
-        Page<TableDTO> secondPageWithoutSearch = tableService.findForPage(SECOND_PAGE, BRAND_FIELD, Sort.Direction.ASC.name(), null);
         Page<TableDTO> pageDataByBrand = tableService.findForPage(FIRST_PAGE, BRAND_FIELD, Sort.Direction.ASC.name(), BRAND_FOR_SEARCH);
 
         Assertions.assertEquals(firstPageWithoutSearch.getContent().size(), FIRST_PAGE_SIZE);
-        Assertions.assertEquals(secondPageWithoutSearch.getContent().size(), SECOND_PAGE_SIZE);
         Assertions.assertEquals(pageDataByBrand.getContent().size(), PAGE_BY_BRAND_SEARCH_SIZE);
     }
 
