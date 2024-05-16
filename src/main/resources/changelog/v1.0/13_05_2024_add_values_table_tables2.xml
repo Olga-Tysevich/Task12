@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="addValuesTables_id2" author="Olga_Tysevich">
+        <insert tableName="tables">
+            <column name="size" value="50"/>
+            <column name="brand" value="Moroso"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="CHIPBOARD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="48"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="RED"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="BROWN"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="58"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+        <insert tableName="tables">
+            <column name="size" value="50"/>
+            <column name="brand" value="Moroso"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="CHIPBOARD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="48"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="RED"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="BROWN"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="58"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+        <insert tableName="tables">
+            <column name="size" value="50"/>
+            <column name="brand" value="Moroso"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="CHIPBOARD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="48"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="RED"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="BROWN"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="58"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+        <insert tableName="tables">
+            <column name="size" value="50"/>
+            <column name="brand" value="Moroso"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="CHIPBOARD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="48"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="RED"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="BROWN"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="58"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+        <insert tableName="tables">
+            <column name="size" value="50"/>
+            <column name="brand" value="Moroso"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="CHIPBOARD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="48"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="RED"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="BROWN"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="58"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+        <insert tableName="tables">
+            <column name="size" value="50"/>
+            <column name="brand" value="Moroso"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="CHIPBOARD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="48"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="RED"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="BROWN"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="58"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+        <insert tableName="tables">
+            <column name="size" value="50"/>
+            <column name="brand" value="Moroso"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="CHIPBOARD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="48"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="RED"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="BROWN"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="58"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+        <insert tableName="tables">
+            <column name="size" value="50"/>
+            <column name="brand" value="Moroso"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="CHIPBOARD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="48"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="RED"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="BROWN"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="58"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+        <insert tableName="tables">
+            <column name="size" value="50"/>
+            <column name="brand" value="Moroso"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="CHIPBOARD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="48"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="RED"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="BROWN"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="58"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+        <insert tableName="tables">
+            <column name="size" value="50"/>
+            <column name="brand" value="Moroso"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="CHIPBOARD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="48"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="RED"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="BROWN"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="58"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+        <insert tableName="tables">
+            <column name="size" value="50"/>
+            <column name="brand" value="Moroso"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="CHIPBOARD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="48"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="RED"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="55"/>
+            <column name="brand" value="Cantori"/>
+            <column name="color" value="BLACK"/>
+            <column name="material" value="METAL"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="45"/>
+            <column name="brand" value="Alivar"/>
+            <column name="color" value="BROWN"/>
+            <column name="material" value="WOOD"/>
+        </insert>
+
+        <insert tableName="tables">
+            <column name="size" value="58"/>
+            <column name="brand" value="Potocco"/>
+            <column name="color" value="WHITE"/>
+            <column name="material" value="VENEER"/>
+        </insert>
+    </changeSet>
+
+
+
+</databaseChangeLog>

@@ -6,8 +6,6 @@
 <%@ page import="static com.example.tables.utils.Constants.PAGE" %>
 <%@ page import="static com.example.tables.utils.Constants.*" %>
 <%@ page import="org.apache.commons.lang3.StringUtils" %>
-<%@ page import="com.example.tables.enums.Color" %>
-<%@ page import="com.example.tables.enums.Material" %>
 <head>
     <meta charset="UTF-8">
     <link href="/css/style.css" rel="stylesheet"/>
@@ -20,7 +18,7 @@
         <%
             Page<TableDTO> pageForDisplay = (Page<TableDTO>) request.getAttribute(PAGE);
             List<TableDTO> list = pageForDisplay.getContent();
-            int pageNumber = pageForDisplay.getNumber();
+            int pageNumber = pageForDisplay.getNumber() + 1;
             int maxPageNumber = pageForDisplay.getTotalPages();
             String sortDir = (String) request.getAttribute(SORT_DIR);
             String currentSortDir =  sortDir.equals(ASC_SORT) ? DESC_SORT : ASC_SORT;
@@ -88,24 +86,34 @@
             <a class="button add" href="/tables/table-create">Добавить</a>
         </div>
 
-<%--                <input class="button light" type="submit" name="button" value="Предыдущая">--%>
-
         <div class="button-container">
-        <%if (maxPageNumber > 1) {%>
+        <%if (maxPageNumber > FIRST_PAGE) {%>
 
-            <%if (pageNumber != FIRST_PAGE) {%>
             <a href="<%=String.format(FIND_PATTERN, FIRST_PAGE, sortField, sortDir) + String.format(KEYWORD_PATTERN, keyword)%>">Первая</a>
+
+            <%if(pageNumber == FIRST_PAGE) {%>
+                <%for (int i = pageNumber + 1; i < Math.min(pageNumber + 5, maxPageNumber); i++) {%>
+                    <a href="<%=String.format(FIND_PATTERN, i, sortField, sortDir) + String.format(KEYWORD_PATTERN, keyword)%>"><%=i%></a>
+                <%}}%>
+
+            <%if (pageNumber != FIRST_PAGE) {
+                for (int i = Math.max(pageNumber - 5, FIRST_PAGE + 1); i < Math.max(pageNumber, FIRST_PAGE); i++) {%>
+            <a href="<%=String.format(FIND_PATTERN, i, sortField, sortDir) + String.format(KEYWORD_PATTERN, keyword)%>"><%=i%></a>
+            <%}}%>
+
+            <%if (pageNumber != maxPageNumber && pageNumber != FIRST_PAGE){%>
+
+                <%for (int i = pageNumber; i < Math.min(pageNumber + 5, maxPageNumber); i++) {%>
+                    <a href="<%=String.format(FIND_PATTERN, i, sortField, sortDir) + String.format(KEYWORD_PATTERN, keyword)%>"><%=i%></a>
+                <%}%>
+
             <%}%>
 
-            <%for (int i = pageNumber + 1; i < Math.min(pageNumber + 5, maxPageNumber - 1); i++) {%>
-            <a href="<%=String.format(FIND_PATTERN, i, sortField, sortDir) + String.format(KEYWORD_PATTERN, keyword)%>"><%=i + 1%></a>
-            <%}%>
-
-            <%if (pageNumber != maxPageNumber - 1) {%>
-            <a href="<%=String.format(FIND_PATTERN, maxPageNumber - 1 , sortField, sortDir) + String.format(KEYWORD_PATTERN, keyword)%>">Последняя</a>
-            <%}%>
-
-        <%}%>
+            <%if (pageNumber != maxPageNumber) {%>
+            <a href="<%=String.format(FIND_PATTERN, maxPageNumber , sortField, sortDir) + String.format(KEYWORD_PATTERN, keyword)%>">Последняя</a>
+            <%}
+            }%>
     </div>
+</div>
 </section>
 </body>

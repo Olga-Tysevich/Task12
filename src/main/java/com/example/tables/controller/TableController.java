@@ -2,10 +2,17 @@ package com.example.tables.controller;
 
 import com.example.tables.dto.TableDTO;
 import com.example.tables.service.TableService;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
+import java.util.stream.Collectors;
+
 import static com.example.tables.utils.Constants.*;
 
 @Controller
@@ -43,21 +50,26 @@ public class TableController {
     }
 
     @PostMapping("/table-create")
-    public String createTable(TableDTO tableDTO) {
+    public String createTable(Model model, @Valid TableDTO tableDTO, BindingResult bindingResult) {
+        if (!isValidTable(model, tableDTO, bindingResult)) {
+            return TABLE;
+        }
         tableService.createOrUpdateTable(tableDTO);
         return TABLES_PAGE_REDIRECT;
     }
 
     @GetMapping("/table-update/{id}")
-    public String showUpdateTable(Model model,
-                                  @PathVariable(TABLE_ID) Long id) {
+    public String showUpdateTable(Model model, @PathVariable(TABLE_ID) Long id) {
         TableDTO table = tableService.findById(id);
         model.addAttribute(TABLE, table);
         return TABLE;
     }
 
     @PostMapping("/table-update")
-    public String updateTable(TableDTO tableDTO) {
+    public String updateTable(Model model, @Valid TableDTO tableDTO, BindingResult bindingResult) {
+        if (!isValidTable(model, tableDTO, bindingResult)) {
+            return TABLE;
+        }
         tableService.createOrUpdateTable(tableDTO);
         return TABLES_PAGE_REDIRECT;
     }
@@ -67,6 +79,18 @@ public class TableController {
     public String deleteTable(@PathVariable(TABLE_ID) Long id) {
         tableService.deleteTable(id);
         return TABLES_PAGE_REDIRECT;
+    }
+
+    private boolean isValidTable(Model model, TableDTO tableDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            String error = bindingResult.getAllErrors().stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .collect(Collectors.joining());
+            model.addAttribute(ERROR, error);
+            model.addAttribute(TABLE, tableDTO);
+            return false;
+        }
+        return true;
     }
 
 }

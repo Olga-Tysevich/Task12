@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 @Builder
 @Data
 @NoArgsConstructor
@@ -15,8 +18,10 @@ public class TableDTO {
 
     private Long id;
 
+    @NotNull(message = "Размер обязателен!")
     private Long size;
 
+    @NotBlank(message = "Бренд обязателен!")
     private String brand;
 
     private Color color;

@@ -31,6 +31,7 @@ public class TableServiceImpl implements TableService {
         repository.save(table);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public TableDTO findById(Long id) {
         Table table = repository.getById(id);
@@ -42,17 +43,19 @@ public class TableServiceImpl implements TableService {
         repository.deleteById(id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<TableDTO> findAll() {
         List<Table> result = repository.findAll();
         return TableMapper.INSTANCE.toDTOList(result);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Page<TableDTO> findForPage(int pageNumber, String sortField, String sortDir, String keyword) {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
                 Sort.by(sortField).descending();
-        Pageable pageRequest = PageRequest.of(pageNumber, PAGE_SIZE, sort);
+        Pageable pageRequest = PageRequest.of(pageNumber - 1, PAGE_SIZE, sort);
         Page<Table> temp = StringUtils.isNotBlank(keyword)? repository.findForPage(keyword, pageRequest)
                 : repository.findAll(pageRequest);
         List<TableDTO> tableDTOList = TableMapper.INSTANCE.toDTOList(temp.getContent());

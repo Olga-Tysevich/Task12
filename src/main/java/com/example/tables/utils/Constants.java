@@ -5,9 +5,8 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class Constants {
     public static final int PAGE_SIZE = 5;
-    public static final int FIRST_PAGE = 0;
+    public static final int FIRST_PAGE = 1;
     public static final String FIND_PATTERN = "/tables/page/%d/?sortField=%s&sortDir=%s";
-    public static final String FIND_BRANDS = "/tables/find-brands/?pageNum=%d&sortField=%s&sortDir=%s";
     public static final String KEYWORD_PATTERN = "&keyword=%s";
     public static final String TABLES_PAGE_REDIRECT = "redirect:/tables";
     public static final String TABLE_ID = "id";
@@ -24,6 +23,7 @@ public class Constants {
     public static final String SORT_DIR = "sortDir";
     public static final String TABLE_LIST = "tableList";
     public static final String TABLE = "table";
+    public static final String ERROR = "error";
 
 
 }

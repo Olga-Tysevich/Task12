@@ -3,6 +3,7 @@
 <%@ page import="org.apache.commons.lang3.StringUtils" %>
 <%@ page import="com.example.tables.enums.Color" %>
 <%@ page import="com.example.tables.enums.Material" %>
+<%@ page import="static com.example.tables.utils.Constants.ERROR" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
@@ -17,6 +18,7 @@
             <%
                 TableDTO table = (TableDTO) request.getAttribute(TABLE);
                 String action = table == null? "/tables/table-create" : "/tables/table-update";
+                String errorMessage = (String) request.getAttribute(ERROR);
             %>
 
             <div class="container hidden" id="student">
@@ -27,17 +29,17 @@
 
                 <form action = "<%=action%>" method="post" id="saveOrUpdate">
                     <div class="form-container">
-                        <%if (table != null) {%>
+                        <%if (table != null && table.getId() != null) {%>
                         <input type="hidden" name="id" value="<%=table.getId()%>"/>
                         <%}%>
 
                         <label class="form-el">Размер</label>
-                        <input class="form-el" required type="text" name="size" placeholder="Введите размер" value="<%=table != null?
+                        <input class="form-el" type="text" name="size" placeholder="Введите размер" value="<%=(table != null && table.getSize() != null)?
                             table.getSize() : StringUtils.EMPTY%>"/>
 
                         <label class="form-el">Бренд</label>
-                        <input class="form-el" required type="text" name="brand" placeholder="Введите бренд" value="<%=table != null?
-                            table.getBrand() : StringUtils.EMPTY%>"/>
+                        <input class="form-el" type="text" name="brand" placeholder="Введите бренд" value="<%=table != null?
+                            StringUtils.defaultIfBlank(table.getBrand(), StringUtils.EMPTY) : StringUtils.EMPTY%>"/>
 
 
 
@@ -59,6 +61,12 @@
                             <%}%>
                         </select>
                     </div>
+
+                    <%if (StringUtils.isNotBlank(errorMessage)) {%>
+                    <div class="button-container">
+                        <h1 style="color: red"><%=errorMessage%></h1>
+                    </div>
+                    <%}%>
 
                     <div class="button-container">
                         <input class="button" type="submit" value="Сохранить" form="saveOrUpdate"/>
