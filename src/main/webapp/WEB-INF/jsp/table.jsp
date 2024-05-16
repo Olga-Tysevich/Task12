@@ -3,7 +3,7 @@
 <%@ page import="org.apache.commons.lang3.StringUtils" %>
 <%@ page import="com.example.tables.enums.Color" %>
 <%@ page import="com.example.tables.enums.Material" %>
-<%@ page import="static com.example.tables.utils.Constants.ERROR" %>
+<%@ page import="static com.example.tables.utils.Constants.ERROR_MESSAGE" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
@@ -18,7 +18,7 @@
             <%
                 TableDTO table = (TableDTO) request.getAttribute(TABLE);
                 String action = table == null? "/tables/table-create" : "/tables/table-update";
-                String errorMessage = (String) request.getAttribute(ERROR);
+                String errorMessage = (String) request.getAttribute(ERROR_MESSAGE);
             %>
 
             <div class="container hidden" id="student">

@@ -23,7 +23,8 @@ public class Constants {
     public static final String SORT_DIR = "sortDir";
     public static final String TABLE_LIST = "tableList";
     public static final String TABLE = "table";
-    public static final String ERROR = "error";
+    public static final String ERROR_MESSAGE = "errorMessage";
+    public static final String ERROR_PAGE = "error";
 
 
 }
