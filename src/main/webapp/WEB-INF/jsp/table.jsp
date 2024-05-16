@@ -77,8 +77,5 @@
             </div>
 
         </section>
-
-        <script rel="script" src="${pageContext.request.contextPath}/js/form.js"></script>
-
     </body>
 </html>
