@@ -2,7 +2,6 @@ package com.example.tables.controller;
 
 import com.example.tables.dto.TableDTO;
 import com.example.tables.service.TableService;
-import com.example.tables.utils.ExceptionManager;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -37,11 +36,7 @@ public class TableController {
                            @RequestParam(SORT_FIELD) String sortField,
                            @RequestParam(SORT_DIR) String sortDir,
                            @RequestParam(KEYWORD) String keyword) {
-        Page<TableDTO> pageForDisplay = ExceptionManager.execute(() ->
-                tableService.findForPage(pageNum, sortField, sortDir, keyword));
-        if (pageForDisplay == null) {
-            return ERROR_PAGE;
-        }
+        Page<TableDTO> pageForDisplay = tableService.findForPage(pageNum, sortField, sortDir, keyword);
         model.addAttribute(PAGE, pageForDisplay);
         model.addAttribute(SORT_FIELD, sortField);
         model.addAttribute(SORT_DIR, sortDir);
@@ -59,19 +54,13 @@ public class TableController {
         if (!isValidTable(model, tableDTO, bindingResult)) {
             return TABLE;
         }
-        boolean isSaved = ExceptionManager.execute(tableService::createOrUpdateTable, tableDTO);
-        if (!isSaved) {
-            return ERROR_PAGE;
-        }
+        tableService.createOrUpdateTable(tableDTO);
         return TABLES_PAGE_REDIRECT;
     }
 
     @GetMapping("/table-update/{id}")
     public String showUpdateTable(Model model, @PathVariable(TABLE_ID) Long id) {
-        TableDTO table = ExceptionManager.execute(() -> tableService.findById(id));
-        if (table == null) {
-            return ERROR_PAGE;
-        }
+        TableDTO table = tableService.findById(id);
         model.addAttribute(TABLE, table);
         return TABLE;
     }
@@ -81,20 +70,14 @@ public class TableController {
         if (!isValidTable(model, tableDTO, bindingResult)) {
             return TABLE;
         }
-        boolean isUpdated = ExceptionManager.execute(tableService::createOrUpdateTable, tableDTO);
-        if (!isUpdated) {
-            return ERROR_PAGE;
-        }
+        tableService.createOrUpdateTable(tableDTO);
         return TABLES_PAGE_REDIRECT;
     }
 
 
     @GetMapping("/table-delete/{id}")
     public String deleteTable(@PathVariable(TABLE_ID) Long id) {
-        boolean isDeleted = ExceptionManager.execute(tableService::deleteTable, id);
-        if (!isDeleted) {
-            return ERROR_PAGE;
-        }
+        tableService.deleteTable(id);
         return TABLES_PAGE_REDIRECT;
     }
 
