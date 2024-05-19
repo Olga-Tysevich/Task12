@@ -1,7 +1,7 @@
 package com.example.tables.dto;
 
-import com.example.tables.enums.Color;
-import com.example.tables.enums.Material;
+import com.example.tables.entity.Color;
+import com.example.tables.entity.Material;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

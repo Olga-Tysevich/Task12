@@ -21,7 +21,6 @@
             int pageNumber = pageForDisplay.getNumber() + 1;
             int maxPageNumber = pageForDisplay.getTotalPages();
             String sortDir = (String) request.getAttribute(SORT_DIR);
-            String currentSortDir =  sortDir.equals(ASC_SORT) ? DESC_SORT : ASC_SORT;
             String sortField = (String) request.getAttribute(SORT_FIELD);
             String keyword = StringUtils.defaultIfBlank((String) request.getAttribute(KEYWORD), StringUtils.EMPTY);
         %>
@@ -47,16 +46,16 @@
             <thead>
             <tr>
                 <th>
-                    <a href="<%=String.format(FIND_PATTERN, pageNumber, SIZE, currentSortDir, keyword)%>">Размер</a>
+                    <a href="<%=String.format(FIND_PATTERN, pageNumber, SIZE, sortDir, keyword)%>">Размер</a>
                 </th>
                 <th>
-                    <a href="<%=String.format(FIND_PATTERN, pageNumber, BRAND, currentSortDir, keyword)%>">Бренд</a>
+                    <a href="<%=String.format(FIND_PATTERN, pageNumber, BRAND, sortDir, keyword)%>">Бренд</a>
                 </th>
                 <th>
-                    <a href="<%=String.format(FIND_PATTERN, pageNumber, COLOR, currentSortDir, keyword)%>">Цвет</a>
+                    <a href="<%=String.format(FIND_PATTERN, pageNumber, COLOR, sortDir, keyword)%>">Цвет</a>
                 </th>
                 <th>
-                    <a href="<%=String.format(FIND_PATTERN, pageNumber, MATERIAL, currentSortDir, keyword)%>">Материал</a>
+                    <a href="<%=String.format(FIND_PATTERN, pageNumber, MATERIAL, sortDir, keyword)%>">Материал</a>
                 </th>
                 <th class="menu">Управление</th>
             </tr>
@@ -110,7 +109,7 @@
             <%}%>
 
             <%if (pageNumber != maxPageNumber) {%>
-            <a href="<%=String.format(FIND_PATTERN, maxPageNumber , sortField, sortDir, keyword)%>">Последняя</a>
+            <a href="<%=String.format(FIND_PATTERN, maxPageNumber , sortField, sortDir, keyword)%>">Последняя: <%=maxPageNumber%></a>
             <%}
             }%>
     </div>

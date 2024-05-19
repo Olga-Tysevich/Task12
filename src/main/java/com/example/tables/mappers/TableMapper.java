@@ -1,4 +1,4 @@
-package com.example.tables.utils;
+package com.example.tables.mappers;
 
 import com.example.tables.dto.TableDTO;
 import com.example.tables.entity.Table;

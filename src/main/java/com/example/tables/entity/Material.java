@@ -1,4 +1,4 @@
-package com.example.tables.enums;
+package com.example.tables.entity;
 
 public enum  Material {
     WOOD,

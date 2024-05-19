@@ -1,8 +1,9 @@
 package com.example.tables.controller;
 
+import com.example.tables.dto.DtoValidator;
 import com.example.tables.dto.TableDTO;
+import com.example.tables.service.SortManager;
 import com.example.tables.service.TableService;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
-import java.util.stream.Collectors;
 
 import static com.example.tables.utils.Constants.*;
 
@@ -39,7 +38,7 @@ public class TableController {
         Page<TableDTO> pageForDisplay = tableService.findForPage(pageNum, sortField, sortDir, keyword);
         model.addAttribute(PAGE, pageForDisplay);
         model.addAttribute(SORT_FIELD, sortField);
-        model.addAttribute(SORT_DIR, sortDir);
+        model.addAttribute(SORT_DIR, SortManager.getNextSortDir(sortDir));
         model.addAttribute(KEYWORD, keyword);
         return TABLE_LIST;
     }
@@ -51,7 +50,7 @@ public class TableController {
 
     @PostMapping("/table-create")
     public String createTable(Model model, @Valid TableDTO tableDTO, BindingResult bindingResult) {
-        if (!isValidTable(model, tableDTO, bindingResult)) {
+        if (!DtoValidator.isValidTable(model, tableDTO, bindingResult)) {
             return TABLE;
         }
         tableService.createOrUpdateTable(tableDTO);
@@ -67,7 +66,7 @@ public class TableController {
 
     @PostMapping("/table-update")
     public String updateTable(Model model, @Valid TableDTO tableDTO, BindingResult bindingResult) {
-        if (!isValidTable(model, tableDTO, bindingResult)) {
+        if (!DtoValidator.isValidTable(model, tableDTO, bindingResult)) {
             return TABLE;
         }
         tableService.createOrUpdateTable(tableDTO);
@@ -79,18 +78,6 @@ public class TableController {
     public String deleteTable(@PathVariable(TABLE_ID) Long id) {
         tableService.deleteTable(id);
         return TABLES_PAGE_REDIRECT;
-    }
-
-    private boolean isValidTable(Model model, TableDTO tableDTO, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            String error = bindingResult.getAllErrors().stream()
-                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                    .collect(Collectors.joining());
-            model.addAttribute(ERROR_MESSAGE, error);
-            model.addAttribute(TABLE, tableDTO);
-            return false;
-        }
-        return true;
     }
 
 }

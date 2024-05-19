@@ -1,91 +1,104 @@
 package com.example.tables.service;
 
 import com.example.tables.dto.TableDTO;
-import com.example.tables.utils.MockUtils;
+import com.example.tables.entity.Table;
+import com.example.tables.repository.TableRepository;
+import com.example.tables.mappers.TableMapper;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.jdbc.AutoConfigureDataJdbc;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
-
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-
 import static com.example.tables.utils.MockConstant.*;
-import static com.example.tables.utils.MockUtils.createTable1;
+import static com.example.tables.utils.MockUtils.createTable;
+import static com.example.tables.utils.MockUtils.createTables;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @AutoConfigureDataJdbc
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class TableServiceImplTest {
+    @Autowired
+    private TableRepository tableRepository;
 
     @Autowired
     private TableService tableService;
 
-
-    @BeforeEach
-    void addToBD() {
-        MockUtils.createTables().forEach(tableService::createOrUpdateTable);
+    @AfterEach
+    void clearDB() {
+        tableRepository.deleteAll();
     }
 
     @Test
     public void createOrUpdateTableTest() {
-        List<TableDTO> before = tableService.findAll();
+        TableDTO table = createTable();
+        Long id = tableService.createOrUpdateTable(table);
 
-        TableDTO table = createTable1();
-        tableService.createOrUpdateTable(table);
+        Table forUpdate = tableRepository.findById(id).orElse(null);
 
-        List<TableDTO> after = tableService.findAll();
+        assert forUpdate != null;
+        Assertions.assertEquals(table.getSize(), forUpdate.getSize());
+        Assertions.assertEquals(table.getBrand(), forUpdate.getBrand());
+        Assertions.assertEquals(table.getColor(), forUpdate.getColor());
+        Assertions.assertEquals(table.getMaterial(), forUpdate.getMaterial());
 
-        Assertions.assertNotEquals(before.size(), after.size());
+        forUpdate.setSize(SIZE2);
+        forUpdate.setBrand(BRAND2);
 
-        TableDTO createdTable = after.get(after.size() - 1);
+        tableService.createOrUpdateTable(TableMapper.INSTANCE.toDTO(forUpdate));
+        TableDTO actual = tableService.findById(forUpdate.getId());
 
-        Assertions.assertEquals(table.getSize(), createdTable.getSize());
-        Assertions.assertEquals(table.getBrand(), createdTable.getBrand());
-        Assertions.assertEquals(table.getColor(), createdTable.getColor());
-        Assertions.assertEquals(table.getMaterial(), createdTable.getMaterial());
-
-        createdTable.setSize(SIZES.get(1));
-        createdTable.setBrand(BRANDS.get(1));
-
-        tableService.createOrUpdateTable(createdTable);
-
-        Assertions.assertNotEquals(table.getSize(), createdTable.getSize());
-        Assertions.assertNotEquals(table.getBrand(), createdTable.getBrand());
+        Assertions.assertNotEquals(SIZE1, actual.getSize());
+        Assertions.assertNotEquals(BRAND1, actual.getBrand());
 
     }
 
     @Test
     public void findByIdTest() {
-        TableDTO table = tableService.findById(TABLE_ID_FOR_SEARCH);
+        Table expected = tableRepository.save(TableMapper.INSTANCE.toEntity(createTable()));
 
-        Assertions.assertNotNull(table);
-        Assertions.assertEquals(table.getId(), TABLE_ID_FOR_SEARCH);
+        TableDTO actual = tableService.findById(expected.getId());
+
+        Assertions.assertNotNull(actual);
+        Assertions.assertEquals(expected.getId(), actual.getId());
+        Assertions.assertEquals(expected.getBrand(), actual.getBrand());
+        Assertions.assertEquals(expected.getSize(), actual.getSize());
+        Assertions.assertEquals(expected.getColor(), actual.getColor());
+        Assertions.assertEquals(expected.getMaterial(), actual.getMaterial());
     }
 
     @Test
     public void deleteTest() {
-        tableService.deleteTable(FIRST_TABLE_ID);
-        Assertions.assertThrows(EntityNotFoundException.class, () -> tableService.findById(FIRST_TABLE_ID));
+        Table forDelete = tableRepository.save(TableMapper.INSTANCE.toEntity(createTable()));
+        tableService.deleteTable(forDelete.getId());
+        Assertions.assertThrows(EntityNotFoundException.class, () -> tableService.findById(forDelete.getId()));
     }
 
     @Test
     public void findAllTest() {
+        tableRepository.save(TableMapper.INSTANCE.toEntity(createTable()));
         List<TableDTO> allTables = tableService.findAll();
         Assertions.assertNotEquals(allTables.size(), EMPTY_LIST);
     }
 
     @Test
     public void findForPageTest() {
-        Page<TableDTO> firstPageWithoutSearch = tableService.findForPage(FIRST_PAGE, BRAND_FIELD, Sort.Direction.ASC.name(), null);
-        Page<TableDTO> pageDataByBrand = tableService.findForPage(FIRST_PAGE, BRAND_FIELD, Sort.Direction.ASC.name(), BRAND_FOR_SEARCH);
+        List<TableDTO> forSave = createTables(LIST_SIZE);
+        TableDTO tableForSearchByBrand = createTable();
+        tableForSearchByBrand.setBrand(BRAND2);
+        tableService.createOrUpdateTable(tableForSearchByBrand);
+        forSave.forEach(tableService::createOrUpdateTable);
 
-        Assertions.assertEquals(firstPageWithoutSearch.getContent().size(), FIRST_PAGE_SIZE);
+        Page<TableDTO> firstPageWithoutSearch = tableService.findForPage(FIRST_PAGE, BRAND_FIELD, Sort.Direction.ASC.name(), null);
+        Page<TableDTO> pageDataByBrand = tableService.findForPage(FIRST_PAGE, BRAND_FIELD, Sort.Direction.ASC.name(), BRAND2);
+
+        Assertions.assertEquals(firstPageWithoutSearch.getContent().size(), PAGE_SIZE);
         Assertions.assertEquals(pageDataByBrand.getContent().size(), PAGE_BY_BRAND_SEARCH_SIZE);
     }
 

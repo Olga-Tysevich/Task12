@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface TableService {
 
-    void createOrUpdateTable(TableDTO tableDTO);
+    Long createOrUpdateTable(TableDTO tableDTO);
 
-    void deleteTable(Long id);
+    boolean deleteTable(Long id);
 
     TableDTO findById(Long id);
 

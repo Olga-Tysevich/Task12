@@ -1,17 +1,17 @@
 package com.example.tables.service;
 
-
 import com.example.tables.dto.TableDTO;
 import com.example.tables.entity.Table;
 import com.example.tables.repository.TableRepository;
-import com.example.tables.utils.TableMapper;
-import org.apache.commons.lang3.StringUtils;
+import com.example.tables.mappers.TableMapper;
+import com.example.tables.repository.TableSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
+import java.util.Optional;
 
 import static com.example.tables.utils.Constants.PAGE_SIZE;
 
@@ -26,21 +26,31 @@ public class TableServiceImpl implements TableService {
     }
 
     @Override
-    public void createOrUpdateTable(TableDTO tableDTO) {
-        Table table = TableMapper.INSTANCE.toEntity(tableDTO);
-        repository.save(table);
+    public Long createOrUpdateTable(TableDTO tableDTO) {
+        return Optional.ofNullable(tableDTO)
+                .map(TableMapper.INSTANCE::toEntity)
+                .map(repository::save)
+                .map(Table::getId)
+                .orElse(null);
     }
 
     @Transactional(readOnly = true)
     @Override
     public TableDTO findById(Long id) {
-        Table table = repository.getById(id);
-        return TableMapper.INSTANCE.toDTO(table);
+        return Optional.ofNullable(id)
+                .flatMap(repository::findById)
+                .map(TableMapper.INSTANCE::toDTO)
+                .orElse(null);
     }
 
     @Override
-    public void deleteTable(Long id) {
-        repository.deleteById(id);
+    public boolean deleteTable(Long id) {
+        return  Optional.ofNullable(id)
+                .map(i -> {
+                    repository.deleteById(i);
+                    return repository.findById(i).isEmpty();
+                })
+                .orElse(false);
     }
 
     @Transactional(readOnly = true)
@@ -53,11 +63,13 @@ public class TableServiceImpl implements TableService {
     @Transactional(readOnly = true)
     @Override
     public Page<TableDTO> findForPage(int pageNumber, String sortField, String sortDir, String keyword) {
-        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
-                Sort.by(sortField).descending();
-        Pageable pageRequest = PageRequest.of(pageNumber - 1, PAGE_SIZE, sort);
-        Page<Table> temp = StringUtils.isNotBlank(keyword)? repository.findForPage(keyword, pageRequest)
-                : repository.findAll(pageRequest);
+        Sort sort = SortManager.defineCurrentSortDir(sortDir, sortField);
+        Specification<Table> spec = TableSpecification.search(keyword);
+        int maxPageNumber = PageCounter.getMaxPageNumber(repository.count(spec), pageNumber, PAGE_SIZE);
+
+        Pageable pageRequest = PageRequest.of(maxPageNumber, PAGE_SIZE, sort);
+        Page<Table> temp = repository.findAll(spec, pageRequest);
+
         List<TableDTO> tableDTOList = TableMapper.INSTANCE.toDTOList(temp.getContent());
         return new PageImpl<>(tableDTOList, temp.getPageable(), temp.getTotalElements());
     }

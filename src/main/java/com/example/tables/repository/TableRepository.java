@@ -12,7 +12,7 @@ import org.springframework.data.domain.*;
 @Repository
 public interface TableRepository extends JpaRepository<Table, Long>, JpaSpecificationExecutor<Table> {
 
-    @Query("SELECT t FROM Table t WHERE CONCAT(t.brand, t.color, t.material, t.size) LIKE %?1%")
-    Page<Table> findForPage(String keyword, Pageable pageable);
+//    @Query("SELECT t FROM Table t WHERE CONCAT(t.brand, t.color, t.material, t.size) LIKE %?1%")
+//    Page<Table> findForPage(String keyword, Pageable pageable);
 
 }

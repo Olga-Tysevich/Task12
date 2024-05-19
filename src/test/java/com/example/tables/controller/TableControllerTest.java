@@ -3,13 +3,13 @@ package com.example.tables.controller;
 import static com.example.tables.utils.Constants.*;
 import static com.example.tables.utils.MockConstant.BRAND_FIELD;
 import static com.example.tables.utils.MockConstant.FIRST_TABLE_ID;
+import static com.example.tables.utils.MockUtils.createTable;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import com.example.tables.dto.TableDTO;
 import com.example.tables.service.TableService;
-import com.example.tables.utils.MockUtils;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -56,7 +56,7 @@ class TableControllerTest {
 
     @Test
     void createTableTest() throws Exception {
-        TableDTO table = MockUtils.createTable1();
+        TableDTO table = createTable();
         performSaveOrUpdate(table,"/tables/table-create");
     }
 
@@ -97,7 +97,7 @@ class TableControllerTest {
 
     @Test
     void updateTable() throws Exception {
-        TableDTO table = MockUtils.createTable1();
+        TableDTO table = createTable();
         table.setId(FIRST_TABLE_ID);
         performSaveOrUpdate(table, "/tables/table-update");
     }

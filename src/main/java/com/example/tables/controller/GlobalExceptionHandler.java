@@ -1,4 +1,4 @@
-package com.example.tables.utils;
+package com.example.tables.controller;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

@@ -1,38 +1,29 @@
 package com.example.tables.utils;
 
 import com.example.tables.dto.TableDTO;
-import com.example.tables.enums.Color;
-import com.example.tables.enums.Material;
-import java.util.ArrayList;
-import java.util.List;
+import com.example.tables.entity.Color;
+import com.example.tables.entity.Material;
 
-import static com.example.tables.utils.MockConstant.BRANDS;
-import static com.example.tables.utils.MockConstant.SIZES;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static com.example.tables.utils.MockConstant.*;
 
 public class MockUtils {
 
-    public static TableDTO createTable1() {
+    public static TableDTO createTable() {
         return TableDTO.builder()
-                .brand(BRANDS.get(0))
-                .size(SIZES.get(0))
-                .color(Color.BLACK)
-                .material(Material.CHIPBOARD)
+                .brand(BRAND1)
+                .size(SIZE1)
+                .color(Color.values()[RANDOM.nextInt(Color.values().length)])
+                .material(Material.values()[RANDOM.nextInt(Material.values().length)])
                 .build();
     }
 
-    public static TableDTO createTable2() {
-        return TableDTO.builder()
-                .brand(BRANDS.get(1))
-                .size(SIZES.get(1))
-                .color(Color.WHITE)
-                .material(Material.WOOD)
-                .build();
-    }
-
-    public static List<TableDTO> createTables() {
-        List<TableDTO> tableList = new ArrayList<>();
-        tableList.add(createTable1());
-        tableList.add(createTable2());
-        return tableList;
+    public static List<TableDTO> createTables(int listSize) {
+        return IntStream.range(0, listSize)
+                .mapToObj(i -> createTable())
+                .collect(Collectors.toList());
     }
 }

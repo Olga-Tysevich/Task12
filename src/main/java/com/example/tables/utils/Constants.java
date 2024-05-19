@@ -7,6 +7,7 @@ public class Constants {
     public static final int PAGE_SIZE = 5;
     public static final int FIRST_PAGE = 1;
     public static final String FIND_PATTERN = "/tables/page/%d/?sortField=%s&sortDir=%s&keyword=%s";
+    public static final String LIKE_QUERY_PATTERN = "%%%s%%";
     public static final String TABLES_PAGE_REDIRECT = "redirect:/tables";
     public static final String TABLE_ID = "id";
     public static final String SIZE = "size";

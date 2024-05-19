@@ -1,8 +1,8 @@
 <%@ page import="com.example.tables.dto.TableDTO" %>
 <%@ page import="static com.example.tables.utils.Constants.TABLE" %>
 <%@ page import="org.apache.commons.lang3.StringUtils" %>
-<%@ page import="com.example.tables.enums.Color" %>
-<%@ page import="com.example.tables.enums.Material" %>
+<%@ page import="com.example.tables.entity.Color" %>
+<%@ page import="com.example.tables.entity.Material" %>
 <%@ page import="static com.example.tables.utils.Constants.ERROR_MESSAGE" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
