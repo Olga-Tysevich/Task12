@@ -1,4 +1,4 @@
-package tables.utils;
+package com.example.tables.utils;
 
 import lombok.experimental.UtilityClass;
 

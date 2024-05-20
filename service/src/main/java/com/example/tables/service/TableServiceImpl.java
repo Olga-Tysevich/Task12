@@ -65,6 +65,7 @@ public class TableServiceImpl implements TableService {
         Pageable pageRequest = PageRequest.of(maxPageNumber, pageSize, sort);
         Page<Table> temp = repository.findAll(spec, pageRequest);
 
+        List<Table> temp2 = temp.getContent();
         List<TableDTO> tableDTOList = TableMapper.INSTANCE.toDTOList(temp.getContent());
         return new PageImpl<>(tableDTOList, temp.getPageable(), temp.getTotalElements());
     }

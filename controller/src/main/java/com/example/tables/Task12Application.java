@@ -1,9 +1,9 @@
-package tables;
+package com.example.tables;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.example.tables"})
 public class Task12Application {
 
     public static void main(String[] args) {

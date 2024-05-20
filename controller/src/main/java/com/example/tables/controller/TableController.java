@@ -1,4 +1,4 @@
-package tables.controller;
+package com.example.tables.controller;
 
 import com.example.tables.dto.DtoValidator;
 import com.example.tables.dto.TableDTO;
@@ -13,7 +13,7 @@ import com.example.tables.service.SortManager;
 
 import javax.validation.Valid;
 
-import static tables.utils.Constants.*;
+import static com.example.tables.utils.Constants.*;
 
 
 @Controller

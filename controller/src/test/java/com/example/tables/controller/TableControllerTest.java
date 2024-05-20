@@ -1,4 +1,4 @@
-//package com.example.tables.controller;
+//package com.example.com.example.tables.controller;
 //
 //import static org.mockito.Mockito.*;
 //import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -20,7 +20,7 @@
 //import org.springframework.test.web.servlet.MockMvc;
 //import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 //import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-//import tables.controller.TableController;
+//import com.example.tables.controller.TableController;
 //import com.example.tables.dto.TableDTO;
 //import com.example.tables.service.TableService;
 //
