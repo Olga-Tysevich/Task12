@@ -11,9 +11,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Builder
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class TableDTO {
 
     private Long id;
