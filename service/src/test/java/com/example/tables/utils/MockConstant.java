@@ -4,6 +4,8 @@ import java.util.Random;
 
 public class MockConstant {
 
+    public static final Long FIRST_TABLE_ID = 1L;
+
     public static final Random RANDOM = new Random();
 
     public static final String BRAND1 = "CantoriTestBrand";

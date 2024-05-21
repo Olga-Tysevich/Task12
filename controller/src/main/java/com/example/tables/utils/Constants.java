@@ -13,8 +13,6 @@ public class Constants {
     public static final String BRAND = "brand";
     public static final String COLOR = "color";
     public static final String MATERIAL = "material";
-    public static final String ASC_SORT = "asc";
-    public static final String DESC_SORT = "desc";
     public static final String PAGE_NUM = "pageNum";
     public static final String PAGE = "pageForDisplay";
     public static final String SORT_FIELD = "sortField";

@@ -5,6 +5,7 @@ import com.example.tables.dto.TableDTO;
 import com.example.tables.service.TableService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,7 +26,7 @@ public class TableController {
 
     @GetMapping
     public String showTablePage(Model model) {
-        return showPage(model, FIRST_PAGE, BRAND, ASC_SORT, null);
+        return showPage(model, FIRST_PAGE, BRAND, Sort.Direction.ASC.name(), null);
     }
 
     @GetMapping("/page/{pageNum}")
