@@ -38,7 +38,7 @@ public class TableController {
         Page<TableDTO> pageForDisplay = tableService.findForPage(pageNum, PAGE_SIZE, sortField, sortDir, keyword);
         model.addAttribute(PAGE, pageForDisplay);
         model.addAttribute(SORT_FIELD, sortField);
-        model.addAttribute(SORT_DIR, SortManager.getNextSortDir(sortDir));
+        model.addAttribute(SORT_DIR, sortDir);
         model.addAttribute(KEYWORD, keyword);
         return TABLE_LIST;
     }

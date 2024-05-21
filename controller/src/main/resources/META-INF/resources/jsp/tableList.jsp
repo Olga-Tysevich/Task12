@@ -4,6 +4,7 @@
 <%@ page import="com.example.tables.dto.TableDTO" %>
 <%@ page import="org.springframework.data.domain.Page" %>
 <%@ page import="java.util.List" %>
+<%@ page import="org.springframework.data.domain.Sort" %>
 <head>
     <meta charset="UTF-8">
     <link href="/static/css/style.css" rel="stylesheet"/>
@@ -43,17 +44,18 @@
         <table>
             <thead>
             <tr>
+                <%String nextSortDir = Sort.Direction.ASC.name().equals(sortDir)? Sort.Direction.DESC.name() : Sort.Direction.ASC.name();%>
                 <th>
-                    <a href="<%=String.format(FIND_PATTERN, pageNumber, SIZE, sortDir, keyword)%>">Размер</a>
+                    <a href="<%=String.format(FIND_PATTERN, pageNumber, SIZE, nextSortDir, keyword)%>">Размер</a>
                 </th>
                 <th>
-                    <a href="<%=String.format(FIND_PATTERN, pageNumber, BRAND, sortDir, keyword)%>">Бренд</a>
+                    <a href="<%=String.format(FIND_PATTERN, pageNumber, BRAND, nextSortDir, keyword)%>">Бренд</a>
                 </th>
                 <th>
-                    <a href="<%=String.format(FIND_PATTERN, pageNumber, COLOR, sortDir, keyword)%>">Цвет</a>
+                    <a href="<%=String.format(FIND_PATTERN, pageNumber, COLOR, nextSortDir, keyword)%>">Цвет</a>
                 </th>
                 <th>
-                    <a href="<%=String.format(FIND_PATTERN, pageNumber, MATERIAL, sortDir, keyword)%>">Материал</a>
+                    <a href="<%=String.format(FIND_PATTERN, pageNumber, MATERIAL, nextSortDir, keyword)%>">Материал</a>
                 </th>
                 <th class="menu">Управление</th>
             </tr>

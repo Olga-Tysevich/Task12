@@ -74,7 +74,7 @@ public class TableControllerTest {
                 .andExpect(view().name(TABLE_LIST))
                 .andExpect(model().attribute(PAGE, pageForDisplay))
                 .andExpect(model().attribute(SORT_FIELD, BRAND))
-                .andExpect(model().attribute(SORT_DIR, Sort.Direction.DESC.name()))
+                .andExpect(model().attribute(SORT_DIR, Sort.Direction.ASC.name()))
                 .andExpect(model().attribute(KEYWORD, StringUtils.EMPTY));
 
         verify(tableService, times(1)).findForPage(FIRST_PAGE, PAGE_SIZE, BRAND, Sort.Direction.ASC.name(), StringUtils.EMPTY);

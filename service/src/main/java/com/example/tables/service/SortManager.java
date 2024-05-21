@@ -4,9 +4,6 @@ import com.example.tables.entity.Table_;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
-
-import java.util.Optional;
-
 @UtilityClass
 public class SortManager {
 
@@ -19,13 +16,5 @@ public class SortManager {
             return Sort.by(Table_.BRAND).ascending();
         }
     }
-
-    public String getNextSortDir(String sortDir) {
-        return Optional.ofNullable(sortDir)
-                .filter(sd -> Sort.Direction.ASC.name().equals(sortDir))
-                .map(sd -> Sort.Direction.DESC.name())
-                .orElse(Sort.Direction.ASC.name());
-    }
-
 
 }
