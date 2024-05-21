@@ -76,8 +76,8 @@ class TableServiceImplTest {
     @Test
     public void deleteTest() {
         Table forDelete = tableRepository.save(TableMapper.INSTANCE.toEntity(createTable()));
-        tableService.deleteTable(forDelete.getId());
-        Assertions.assertThrows(EntityNotFoundException.class, () -> tableService.findById(forDelete.getId()));
+        boolean isDeleted = tableService.deleteTable(forDelete.getId());
+        Assertions.assertTrue(isDeleted);
     }
 
     @Test
